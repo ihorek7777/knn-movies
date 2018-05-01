@@ -11,10 +11,10 @@ const url = 'mongodb://localhost:27017'
 const dbName = 'knn-movies'
 
 app
+	.use(logger())
 	.use(bodyParser())
 	.use(router.routes())
 	.use(router.allowedMethods())
-	.use(logger())
 
 app.listen(port, () => {
 	console.log('Server listening on port: ', port)
@@ -23,7 +23,7 @@ app.listen(port, () => {
 MongoClient.connect(url, function(err, client) {
 	if (err) throw new Error('Fail to connect to the db server')
 
-	console.log("Connected successfully to server");
+	console.log("Connected successfully to db");
 
 	app.context.db = client.db(dbName);
 
